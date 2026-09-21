@@ -1,0 +1,411 @@
+.location {
+  position: relative;
+  padding-block: clamp(44px, 4vw, 64px) clamp(48px, 4vw, 72px);
+  background: var(--color-bg);
+  overflow: clip;
+}
+
+.location-grid {
+  position: relative;
+  align-items: start;
+  max-width: 1600px;
+  margin-inline: auto;
+  isolation: isolate;
+}
+
+.location-orbit {
+  position: absolute;
+  z-index: -1;
+  left: 22%;
+  bottom: -2%;
+  width: 64%;
+  aspect-ratio: 1;
+  border: 1px solid var(--color-line);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.location-copy-col {
+  grid-column: 1 / 5;
+  padding-top: clamp(22px, 2.4vw, 38px);
+  min-width: 0;
+}
+
+.location-heading .eyebrow {
+  display: block;
+  margin-bottom: clamp(26px, 2.5vw, 40px);
+}
+
+.location-title {
+  font-size: clamp(76px, 7.8vw, 128px);
+  line-height: 0.91;
+  font-weight: 400;
+  letter-spacing: -0.065em;
+  text-transform: uppercase;
+}
+
+.location-subtitle {
+  display: block;
+  margin-top: 24px;
+  font-size: clamp(10px, 0.9vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.23em;
+  line-height: 1.6;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+
+.location-copy {
+  max-width: 345px;
+  margin-top: 26px;
+  padding-right: 16px;
+  font-size: clamp(14px, 1.12vw, 17px);
+  line-height: 1.75;
+  font-weight: 300;
+  color: var(--color-ink-dim);
+}
+
+.location-copy::before {
+  content: "";
+  display: block;
+  width: 34px;
+  height: 1px;
+  margin-bottom: 26px;
+  background: var(--color-line-strong);
+}
+
+.location-explore {
+  margin-top: 30px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  gap: 20px;
+}
+
+.location-visual {
+  grid-column: 5 / 11;
+  position: relative;
+  min-width: 0;
+}
+
+.location-main-image {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  height: clamp(680px, 56vw, 920px);
+  overflow: hidden;
+  background: var(--color-bg-alt);
+}
+
+.location-main-image img {
+  position: absolute;
+  top: -10%;
+  width: 100%;
+  height: 112%;
+  object-fit: cover;
+  object-position: 52% 80%;
+}
+
+.location-main-image figcaption {
+  position: absolute;
+  top: 6%;
+  left: 5%;
+  max-width: 165px;
+  font-size: clamp(8px, 0.67vw, 10px);
+  font-weight: 600;
+  line-height: 2.05;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-surface);
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+}
+
+.location-main-image figcaption::after {
+  content: "";
+  display: block;
+  width: 35px;
+  height: 1px;
+  margin-top: 18px;
+  background: currentColor;
+  opacity: 0.55;
+}
+
+/* Mobile-only elements (see the <768px block below) — invisible by default
+   so desktop/tablet are completely unaffected. */
+.location-mobile-blurb,
+.location-image-pin,
+.location-mobile-closing,
+.location-explore-label-mobile {
+  display: none;
+}
+
+.location-sub-image {
+  position: absolute;
+  z-index: 2;
+  left: -6%;
+  bottom: 7%;
+  width: 43%;
+  margin: 0;
+}
+
+.location-sub-image-frame {
+  padding: 6px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-line-strong);
+}
+
+.location-sub-image img {
+  width: 100%;
+  aspect-ratio: 1.12;
+  object-fit: cover;
+  object-position: 55% 35%;
+  filter: grayscale(1);
+}
+
+.location-sub-image figcaption {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 5px 12px;
+  padding: 10px 7px;
+  background: var(--color-bg);
+  font-size: 8px;
+  line-height: 1.6;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  color: var(--color-ink-dim);
+}
+
+.location-side {
+  grid-column: 11 / 13;
+  padding: 22px 0 0 clamp(8px, 1.1vw, 18px);
+  min-width: 0;
+}
+
+.location-coords {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: clamp(10px, 0.9vw, 13px);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.13em;
+  color: var(--color-ink-faint);
+}
+
+.location-coords::before,
+.location-nearby::before {
+  content: "";
+  display: block;
+  width: 35px;
+  height: 1px;
+  background: var(--color-line-strong);
+  margin-bottom: 14px;
+}
+
+.location-map-block {
+  border-left: 1px solid var(--color-line-strong);
+  margin-top: 30px;
+  padding-left: 10px;
+}
+
+.location-map {
+  width: 100%;
+  max-width: 155px;
+  color: var(--color-line-strong);
+}
+
+.location-map svg { display: block; width: 100%; stroke: currentColor; stroke-width: 0.65; }
+.location-map-grid { opacity: 0.45; stroke-width: 0.6; }
+.location-map-pin { fill: var(--color-accent); stroke: none; }
+.location-map-pin-center { fill: var(--color-bg); stroke: none; }
+
+.location-map-label {
+  display: block;
+  margin-top: 14px;
+  font-size: 9px;
+  line-height: 1.9;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-ink-dim);
+}
+
+.location-nearby { margin-top: 34px; }
+.location-nearby::before { margin-bottom: 25px; }
+.location-nearby-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.location-nearby-list { margin-top: 14px; }
+.location-nearby-list li {
+  padding-block: 9px;
+  border-bottom: 1px solid var(--color-line);
+  font-size: clamp(11px, 0.92vw, 14px);
+  line-height: 1.6;
+  color: var(--color-ink-dim);
+}
+.location-nearby-list li:last-child { border-bottom: 0; }
+
+@media (max-width: 1100px) {
+  .location-title { font-size: 7.7vw; }
+  .location-copy { padding-right: 4px; font-size: 14px; line-height: 1.7; }
+  .location-main-image { height: 690px; }
+  .location-side { padding-left: 4px; }
+  .location-sub-image { width: 43%; left: 0; }
+}
+
+@media (max-width: 900px) {
+  .location-grid { row-gap: 32px; }
+  .location-copy-col { grid-column: 1 / 6; padding-top: 18px; }
+  .location-title { font-size: 8.4vw; }
+  .location-heading .eyebrow { margin-bottom: 26px; }
+  .location-subtitle { max-width: 240px; margin-top: 20px; }
+  .location-copy { margin-top: 22px; }
+  .location-copy::before { margin-bottom: 22px; }
+  .location-explore { margin-top: 24px; font-size: 10px; }
+  .location-visual { grid-column: 6 / 13; }
+  .location-main-image { height: 550px; }
+  .location-sub-image { position: relative; left: auto; bottom: auto; width: 59%; margin: -66px 0 0 -14px; }
+  .location-side {
+    grid-column: 1 / 13;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    align-items: start;
+    gap: 30px;
+    border-top: 1px solid var(--color-line);
+    padding: 30px 0 0;
+  }
+  .location-coords { font-size: 11px; }
+  .location-map-block { margin-top: 0; }
+  .location-map { max-width: 130px; }
+  .location-map-label { text-align: left; padding-left: 15px; }
+  .location-nearby { margin-top: 0; }
+  .location-nearby::before { display: none; }
+  .location-nearby-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 18px; margin-top: 12px; }
+  .location-nearby-list li { font-size: 12px; }
+}
+
+@media (max-width: 600px) {
+  .location { padding-block: 36px 40px; }
+
+  .location-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "copy copy"
+      "mainimage mainimage"
+      "subimage coords"
+      "subimage map"
+      "nearby nearby"
+      "closing closing";
+    row-gap: 18px;
+    column-gap: 14px;
+  }
+
+  /* Intro */
+  .location-copy-col { grid-area: copy; width: 100%; padding-top: 0; position: relative; }
+  .location-heading .eyebrow { margin-bottom: 12px; }
+  .location-title { font-size: clamp(42px, 13.5vw, 60px); line-height: 0.96; }
+  .location-subtitle { max-width: none; margin-top: 8px; font-size: 9px; letter-spacing: 0.17em; }
+  .location-copy { max-width: none; margin-top: 14px; padding-right: 0; font-size: 13px; line-height: 1.65; }
+  .location-copy::before { margin-bottom: 14px; }
+  .location-explore { margin-top: 16px; font-size: 10px; }
+  .location-explore-label-desktop { display: none; }
+  .location-explore-label-mobile { display: inline; }
+
+  .location-mobile-blurb {
+    display: block;
+    position: absolute;
+    top: -4px;
+    right: 0;
+    width: 108px;
+    padding: 18px 8px 0;
+    text-align: center;
+  }
+  .location-mobile-blurb::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--color-line);
+    border-radius: 50%;
+  }
+  .location-mobile-blurb span {
+    display: block;
+    font-size: 7px;
+    font-weight: 600;
+    line-height: 1.65;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-ink-faint);
+  }
+
+  /* Main image — wide editorial crop instead of the tall desktop portrait */
+  .location-visual { display: contents; }
+  .location-main-image { grid-area: mainimage; height: auto; aspect-ratio: 1.6; margin: 0; }
+  .location-main-image img { top: 0; height: 100%; object-position: 54% 60%; }
+  .location-main-image figcaption { display: none; }
+  .location-image-pin {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 8px;
+    line-height: 1.6;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-surface);
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.55);
+  }
+  .location-image-pin i {
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
+  }
+
+  /* Sub image + coordinates/map pairing, as one editorial block */
+  .location-sub-image { grid-area: subimage; position: static; left: auto; bottom: auto; width: auto; height: 100%; margin: 0; }
+  .location-sub-image-frame { height: 100%; }
+  .location-sub-image img { height: 100%; aspect-ratio: auto; }
+  .location-sub-image figcaption { font-size: 7px; }
+
+  .location-side { display: contents; }
+  .location-coords { grid-area: coords; font-size: 10px; }
+  .location-coords::before { margin-bottom: 10px; }
+  .location-map-block { grid-area: map; margin-top: 12px; border-left: 0; padding-left: 0; }
+  .location-map { max-width: 100px; margin-inline: auto; }
+  .location-map-label { text-align: center; font-size: 8px; }
+
+  .location-nearby { grid-area: nearby; margin-top: 8px; padding-top: 18px; border-top: 1px solid var(--color-line); }
+  .location-nearby::before { display: none; }
+  .location-nearby-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 18px; margin-top: 12px; }
+  .location-nearby-list li { padding-block: 8px; font-size: 11.5px; }
+  /* 7 landmarks split 3 left / 4 right (matching the reference) instead of the
+     default alternating auto-placement, which would put the 7th item (Railway
+     Station) in the left column. Only the 7th item needs an explicit override. */
+  .location-nearby-list li:nth-child(7) { grid-column: 2; }
+
+  .location-mobile-closing {
+    display: block;
+    grid-area: closing;
+    margin: 4px 0 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+  }
+
+  .location-orbit { display: none; }
+}

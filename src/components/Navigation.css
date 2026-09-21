@@ -1,0 +1,211 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 250;
+  padding: 30px var(--container-pad);
+  background: transparent;
+  backdrop-filter: none;
+  transition: padding 0.6s var(--ease-soft), background 0.6s var(--ease-soft),
+    backdrop-filter 0.6s var(--ease-soft), border-color 0.6s var(--ease-soft);
+  border-bottom: 1px solid transparent;
+}
+
+.nav.is-scrolled {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: rgba(250, 248, 244, 0.97);
+  backdrop-filter: blur(20px) saturate(1.1);
+  -webkit-backdrop-filter: blur(20px) saturate(1.1);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-side {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo {
+  height: 75px;
+  width: auto;
+  display: block;
+  transition: height 0.5s var(--ease-soft);
+}
+
+.nav.is-scrolled .nav-logo {
+  height: 60px;
+}
+
+.nav-actions {
+  justify-self: end;
+  gap: 28px;
+}
+
+.nav-enquire {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink-dim);
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--color-line-strong);
+  transition: color 0.35s ease, border-color 0.35s ease;
+}
+
+.nav-enquire:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.nav-enquire-arrow {
+  font-size: 13px;
+  line-height: 1;
+  transition: transform 0.35s var(--ease-soft);
+}
+
+.nav-enquire:hover .nav-enquire-arrow {
+  transform: translateX(4px);
+}
+
+.nav-menu-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-menu-btn-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  transition: transform 0.35s var(--ease-soft);
+}
+
+.nav-menu-btn:hover .nav-menu-btn-label {
+  transform: translateX(-3px);
+}
+
+.nav-menu-btn-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 22px;
+}
+
+.nav-menu-btn-lines span {
+  display: block;
+  height: 1px;
+  width: 100%;
+  background: var(--color-ink);
+  transition: transform 0.4s var(--ease-soft), opacity 0.3s ease, width 0.35s var(--ease-soft);
+}
+
+.nav-menu-btn-lines span:last-child {
+  width: 62%;
+}
+
+.nav-menu-btn:hover .nav-menu-btn-lines span:last-child {
+  width: 100%;
+}
+
+.nav-menu-btn.is-open .nav-menu-btn-lines span {
+  width: 100%;
+}
+
+.nav-menu-btn.is-open .nav-menu-btn-lines span:first-child {
+  transform: translateY(2.5px) rotate(45deg);
+}
+.nav-menu-btn.is-open .nav-menu-btn-lines span:last-child {
+  transform: translateY(-2.5px) rotate(-45deg);
+}
+
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 240;
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 64px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s var(--ease-soft), visibility 0.5s;
+}
+
+.nav-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav-overlay ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.nav-overlay li {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s var(--ease-soft), transform 0.5s var(--ease-soft);
+}
+
+.nav-overlay.is-open li {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav-overlay button {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 5vw, 42px);
+  color: var(--color-ink-dim);
+  transition: color 0.3s ease;
+}
+
+.nav-overlay button:hover {
+  color: var(--color-accent);
+}
+
+.nav-overlay-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--color-ink-faint);
+}
+
+@media (max-width: 720px) {
+  .nav {
+    padding: 20px var(--container-pad);
+  }
+  .nav-actions {
+    gap: 0;
+  }
+  .nav-enquire {
+    display: none;
+  }
+  .nav-elysium {
+    font-size: 11px;
+  }
+  .nav-menu-btn-label {
+    display: none;
+  }
+  .nav-menu-btn-lines {
+    width: 24px;
+  }
+}

@@ -1,0 +1,71 @@
+.materials {
+  position: relative;
+  padding-block: clamp(56px, 5.8vw, 88px) clamp(40px, 3.2vw, 56px);
+  background: var(--color-bg);
+  overflow: clip;
+}
+.materials-composition { position: relative; max-width: 1440px; margin-inline: auto; aspect-ratio: 1.87; }
+.materials-orbit { position: absolute; width: 56%; aspect-ratio: 1; top: -2%; left: 33%; border: 1px solid var(--color-line-strong); border-radius: 50%; pointer-events: none; }
+.materials-head { position: absolute; top: 0; left: 0; width: 36%; }
+.materials-head .eyebrow { display: block; margin-bottom: clamp(20px, 2vw, 30px); }
+.materials-title { max-width: 440px; font-size: clamp(34px, 4.15vw, 64px); line-height: 1.08; letter-spacing: -0.035em; }
+.materials-intro { max-width: 320px; margin-top: clamp(24px, 2.7vw, 40px); font-size: clamp(12px, 1.15vw, 16px); line-height: 1.65; color: var(--color-ink-dim); }
+.materials-intro::before { content: ""; display: block; width: 36px; height: 1px; margin-bottom: clamp(20px, 2.2vw, 32px); background: var(--color-line-strong); }
+.materials-frame { position: absolute; margin: 0; }
+.materials-frame-clip { position: absolute; inset: 0; overflow: hidden; }
+.materials-frame img { position: absolute; inset: -6%; width: 112%; height: 112%; object-fit: cover; }
+.materials-frame figcaption { position: absolute; width: 125px; font-family: var(--font-display); font-size: clamp(16px, 1.4vw, 21px); line-height: 1.3; }
+.materials-frame figcaption > span { display: block; color: var(--color-ink-faint); margin-bottom: 4px; font-size: 0.95em; }
+.materials-frame figcaption::after { content: ""; position: absolute; top: 3.25em; left: 0; width: 18px; height: 1px; background: var(--color-line-strong); }
+.materials-frame figcaption p { margin-top: 28px; font-family: var(--font-sans); font-size: clamp(11px, 0.98vw, 14px); line-height: 1.5; color: var(--color-ink-dim); }
+.materials-living { top: 0; left: 37%; width: 44.5%; height: 72%; }
+.materials-living img { object-position: 40% center; }
+.materials-living figcaption { top: 14%; left: calc(100% + 6vw); }
+.materials-living::after { content: ""; position: absolute; top: 12px; left: 100%; width: 6vw; height: 1px; background: var(--color-line-strong); }
+.materials-bedroom { top: 50%; left: 12%; width: 29.5%; height: 48%; z-index: 2; }
+.materials-bedroom img { object-position: 60% center; }
+.materials-bedroom figcaption { left: -10.8vw; top: 47%; width: 9vw; max-width: 140px; }
+.materials-dining { left: 55%; top: 62%; width: 28%; height: 38%; z-index: 3; }
+.materials-dining img { object-position: 60% center; }
+.materials-dining figcaption { left: calc(100% + 3.5vw); top: 24%; width: 10vw; max-width: 140px; }
+.materials-note { position: absolute; top: 42%; right: 0; width: 12%; font-family: var(--font-display); font-style: italic; font-size: clamp(16px, 1.5vw, 22px); line-height: 1.4; color: var(--color-accent); }
+@media (min-width: 1760px) {
+  .materials-bedroom figcaption { left: -172px; }
+  .materials-living figcaption { left: calc(100% + 85px); }
+  .materials-dining figcaption { left: calc(100% + 50px); }
+}
+@media (max-width: 1100px) and (min-width: 701px) {
+  .materials-composition { aspect-ratio: 1.4; }
+  .materials-head { width: 39%; }
+  .materials-title { font-size: clamp(31px, 4.1vw, 45px); }
+  .materials-intro { max-width: 260px; }
+  .materials-living { left: 44%; width: 46%; height: 51%; }
+  .materials-living figcaption { top: 16px; left: calc(100% + 16px); width: 64px; }
+  .materials-living::after { display: none; }
+  .materials-bedroom { left: 15%; top: 57%; width: 34%; height: 36%; }
+  .materials-bedroom figcaption { left: -13.5vw; top: 25%; width: 11.5vw; }
+  .materials-dining { left: 55%; top: 61%; width: 30%; height: 32%; }
+  .materials-dining figcaption { left: calc(100% + 16px); top: 10%; width: 11vw; }
+  .materials-note { top: 53%; right: 0; width: 45%; font-size: 16px; }
+  .materials-orbit { width: 66%; left: 27%; top: 10%; }
+}
+@media (max-width: 700px) {
+  .materials { padding-block: 52px 44px; }
+  .materials-composition { aspect-ratio: auto; display: flex; flex-direction: column; gap: 30px; }
+  .materials-head, .materials-frame, .materials-note { position: relative; inset: auto; width: auto; height: auto; }
+  .materials-head { max-width: 420px; }
+  .materials-title { font-size: clamp(34px, 8.8vw, 48px); }
+  .materials-intro { font-size: 14px; max-width: 330px; margin-top: 22px; }
+  .materials-intro::before { margin-bottom: 20px; }
+  .materials-orbit { width: 110%; left: 6%; top: 29%; }
+  .materials-frame-clip { position: relative; inset: auto; overflow: hidden; aspect-ratio: 4 / 3; }
+  .materials-frame img { position: absolute; inset: -6%; width: 112%; height: 112%; }
+  .materials-frame figcaption { position: relative; inset: auto; width: auto; max-width: none; margin-top: 14px; font-size: 19px; }
+  .materials-frame figcaption > span { display: inline; margin-right: 12px; font-size: 15px; }
+  .materials-frame figcaption::after, .materials-living::after { display: none; }
+  .materials-frame figcaption p { margin-top: 10px; font-size: 12px; max-width: 220px; }
+  .materials-living { width: 92%; align-self: flex-end; }
+  .materials-note { width: 75%; margin-left: 8%; font-size: 19px; }
+  .materials-bedroom { width: 78%; align-self: flex-start; }
+  .materials-dining { width: 78%; align-self: flex-end; }
+}

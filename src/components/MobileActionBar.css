@@ -1,0 +1,48 @@
+.mobile-action-bar {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .mobile-action-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 260;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--color-line);
+    background: rgba(250, 248, 244, 0.97);
+    backdrop-filter: blur(14px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .mobile-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 10px;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .mobile-action-btn.is-enquire {
+    background: var(--color-ink);
+    color: var(--color-surface);
+  }
+
+  .mobile-action-btn.is-whatsapp {
+    background: var(--color-accent);
+    color: var(--color-surface);
+  }
+
+  .mobile-action-icon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+}

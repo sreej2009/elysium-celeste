@@ -1,0 +1,216 @@
+.floorplan {
+  position: relative;
+  background: var(--color-bg);
+}
+
+.floorplan-head {
+  margin-bottom: clamp(40px, 6vh, 72px);
+}
+
+.floorplan-head .eyebrow {
+  display: block;
+  margin-bottom: 18px;
+}
+
+.floorplan-title {
+  font-size: clamp(32px, 4.4vw, 56px);
+  color: var(--color-ink);
+  line-height: 1.12;
+}
+
+.floorplan-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: clamp(40px, 6vh, 72px);
+}
+
+.floorplan-tabs {
+  display: flex;
+  gap: 22px;
+}
+
+.floorplan-tabs button {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+  padding-bottom: 6px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.floorplan-tabs button.is-active {
+  color: var(--color-ink);
+  border-color: var(--color-accent);
+}
+
+.floorplan-tabs button:hover {
+  color: var(--color-accent);
+}
+
+.floorplan-divider {
+  width: 1px;
+  height: 18px;
+  background: var(--color-line-strong);
+}
+
+.floorplan-body {
+  display: grid;
+  grid-template-columns: 0.72fr 2fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: start;
+}
+
+.floorplan-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.floorplan-nav-item {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--color-line);
+  text-align: left;
+  transition: padding-left 0.3s var(--ease-soft);
+}
+
+.floorplan-nav-item:hover,
+.floorplan-nav-item.is-active {
+  padding-left: 10px;
+}
+
+.floorplan-nav-index {
+  font-family: var(--font-display);
+  font-size: 11px;
+  color: var(--color-accent);
+}
+
+.floorplan-nav-name {
+  font-size: 14px;
+  color: var(--color-ink-dim);
+  flex: 1;
+  transition: color 0.3s ease;
+}
+
+.floorplan-nav-item.is-active .floorplan-nav-name {
+  color: var(--color-ink);
+}
+
+.floorplan-nav-dim {
+  font-size: 11px;
+  color: var(--color-ink-faint);
+}
+
+.floorplan-stage {
+  position: relative;
+}
+
+.floorplan-image-wrap {
+  position: relative;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  overflow: hidden;
+  padding: clamp(16px, 2.4vw, 40px);
+}
+
+.floorplan-image-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  animation: plan-fade-in 0.6s var(--ease-soft);
+}
+
+@keyframes plan-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.floorplan-spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-soft);
+  background: radial-gradient(
+    circle 200px at var(--sx, 50%) var(--sy, 50%),
+    transparent 0%,
+    rgba(250, 248, 244, 0.85) 100%
+  );
+}
+
+.floorplan-hotspot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.floorplan-hotspot-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-accent-soft);
+  transition: transform 0.3s var(--ease-soft), box-shadow 0.3s ease;
+}
+
+.floorplan-hotspot.is-active .floorplan-hotspot-dot {
+  transform: scale(1.6);
+}
+
+.floorplan-hotspot-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-surface);
+  background: var(--color-ink);
+  padding: 5px 10px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s var(--ease-soft), transform 0.3s var(--ease-soft);
+}
+
+.floorplan-hotspot.is-active .floorplan-hotspot-tag {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.floorplan-hint {
+  margin-top: 18px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  .floorplan-body {
+    grid-template-columns: 1fr;
+  }
+  .floorplan-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+  }
+  .floorplan-nav-item {
+    border-bottom: none;
+    padding: 6px 0;
+  }
+  .floorplan-nav-dim {
+    display: none;
+  }
+  .floorplan-hotspot-tag {
+    display: none;
+  }
+  .floorplan-image-wrap {
+    padding: 10px;
+  }
+}

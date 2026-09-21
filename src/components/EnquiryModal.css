@@ -1,0 +1,120 @@
+.enquiry-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(33, 31, 27, 0.55);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.enquiry-modal-panel {
+  position: relative;
+  width: min(440px, 100%);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line-strong);
+  box-shadow: 0 30px 80px rgba(33, 31, 27, 0.18);
+  padding: 44px;
+}
+
+.enquiry-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  font-size: 26px;
+  color: var(--color-ink-dim);
+  line-height: 1;
+}
+
+.enquiry-modal-panel h3 {
+  margin-top: 12px;
+  font-size: 26px;
+  color: var(--color-ink);
+}
+
+.enquiry-modal-panel form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.enquiry-modal-panel label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+
+.enquiry-modal-panel input,
+.enquiry-modal-panel textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-line-strong);
+  padding: 10px 2px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--color-ink);
+  resize: none;
+}
+
+.enquiry-modal-panel input:focus,
+.enquiry-modal-panel textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.enquiry-modal-interest {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.enquiry-modal-interest > span {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+
+.enquiry-modal-interest-toggle { display: flex; gap: 9px; }
+.enquiry-modal-interest-toggle button {
+  flex: 1;
+  padding: 10px 0;
+  border: 1px solid var(--color-line-strong);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-ink-dim);
+  transition: background 0.25s, border-color 0.25s, color 0.25s;
+}
+
+.enquiry-modal-interest-toggle button.is-active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-surface);
+}
+
+.enquiry-submit {
+  margin-top: 8px;
+}
+
+.enquiry-modal-thanks p {
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--color-ink-dim);
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .enquiry-modal-panel {
+    padding: 30px 24px;
+  }
+}
