@@ -8,6 +8,7 @@ import kitchenMain from "../assets/images/interior-living-01.webp";
 import livingRoom from "../assets/images/interior-bedroom-01.webp";
 import bedroomBalconyDoor from "../assets/images/interior-kitchen-01.webp";
 import loungeSpace from "../assets/images/interior-living-02.webp";
+import bathroomConcept from "../assets/images/bathroom-concept-generated.png";
 import FadeIn from "../components/FadeIn";
 import { gsap, ScrollTrigger, getLenis } from "../lib/smoothScroll";
 import { usePrefersReducedMotion, useMediaQuery } from "../lib/hooks";
@@ -18,15 +19,13 @@ type SpecVisual =
   | { kind: "image"; src: string; alt: string; focal?: string }
   | { kind: "editorial"; quote: string };
 
-// One distinct, real Celeste asset per category — no image is reused across
-// categories. Toilets/Plumbing has no matching photographic asset, so it gets
-// an editorial typographic treatment built from the category's own verified
-// specification text instead of a repeated or invented image.
+// Each category has a distinct visual. Toilets/Plumbing uses a user-requested
+// AI-generated bathroom concept; it is not an actual Celeste property photo.
 const SPEC_VISUALS: Record<string, SpecVisual> = {
   structure: { kind: "image", src: buildingDay, alt: "Elysium Celeste's architectural facade and structure, R.S. Puram, Coimbatore", focal: "60% 35%" },
   interiors: { kind: "image", src: foyerDining, alt: "Celeste foyer corridor and dining area interior", focal: "center" },
   bedroom: { kind: "image", src: bedroomMain, alt: "Celeste bedroom interior with wardrobe storage", focal: "center 35%" },
-  water: { kind: "editorial", quote: "Designer anti-skid tile flooring, with fully concealed hot and cold water lines throughout." },
+  water: { kind: "image", src: bathroomConcept, alt: "AI-generated bathroom concept with tiled finishes, a vanity and glass shower", focal: "center 55%" },
   kitchen: { kind: "image", src: kitchenMain, alt: "Celeste kitchen interior", focal: "center" },
   electrical: { kind: "image", src: buildingNight, alt: "Elysium Celeste's facade illuminated at night", focal: "center 28%" },
   common: { kind: "image", src: livingRoom, alt: "Celeste interior living space", focal: "center 40%" },

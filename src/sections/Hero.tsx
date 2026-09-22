@@ -213,7 +213,6 @@ export default function Hero() {
           <span className="hero-info-rule" aria-hidden="true" />
           {HERO_META.map((item) => (
             <div className="hero-info-item" key={item.num}>
-              <span className="hero-info-num">{item.num}</span>
               <MetaIcon kind={item.icon} />
               <span className="hero-info-text">
                 <span className="hero-info-primary">{item.primary}</span>

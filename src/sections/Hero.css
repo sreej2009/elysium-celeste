@@ -97,15 +97,6 @@
   border-top: 1px solid rgba(30, 30, 30, 0.12);
 }
 .hero-info-item:hover { transform: translateX(4px); }
-.hero-info-num {
-  flex-shrink: 0;
-  margin-top: 2px;
-  font-family: var(--font-sans);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  color: var(--color-accent);
-}
 .hero-info-icon {
   flex-shrink: 0;
   width: 17px;
@@ -376,7 +367,6 @@
   .hero-info-item + .hero-info-item { border-top: 0; }
   .hero-info-item { border-left: 1px solid rgba(30, 30, 30, 0.14); }
   .hero-info-item:hover { transform: none; }
-  .hero-info-num { font-size: 9px; }
   .hero-info-icon { width: 17px; height: 17px; }
   .hero-info-primary { font-size: 12.5px; }
   .hero-info-secondary { font-size: 8.5px; letter-spacing: 0.14em; }
