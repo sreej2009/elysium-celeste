@@ -27,9 +27,6 @@ export default function Enquiry() {
           Elysium
         </FadeIn>
         <FadeIn as="h2" className="enquiry-title" delay={40}>Celeste</FadeIn>
-        {/* <FadeIn as="p" className="enquiry-tagline" delay={80}>
-          Where life always hits a high note.
-        </FadeIn> */}
 
         <FadeIn as="div" className="enquiry-cta-row" delay={160}>
           <span className="enquiry-question">Interested?</span>

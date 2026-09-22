@@ -6,6 +6,7 @@ import foyerDining from "../assets/images/interior-dining-01.webp";
 import bedroomMain from "../assets/images/interior-bedroom-02.webp";
 import kitchenMain from "../assets/images/interior-living-01.webp";
 import livingRoom from "../assets/images/interior-bedroom-01.webp";
+import evChargingConcept from "../assets/images/ev-charging-concept-generated.png";
 import bedroomBalconyDoor from "../assets/images/interior-kitchen-01.webp";
 import loungeSpace from "../assets/images/interior-living-02.webp";
 import bathroomConcept from "../assets/images/bathroom-concept-generated.png";
@@ -32,6 +33,15 @@ const SPEC_VISUALS: Record<string, SpecVisual> = {
   doors: { kind: "image", src: bedroomBalconyDoor, alt: "Celeste bedroom with a glazed door opening to the balcony", focal: "left center" },
   other: { kind: "image", src: loungeSpace, alt: "Celeste interior finishes and lounge seating", focal: "center 35%" },
 };
+
+const HIGHLIGHT_ITEM = "EV charging provisions";
+
+// Mobile-only reorder: EV charging leads the Common Areas list instead of
+// trailing it, per feedback. Desktop keeps the brochure's original order.
+function mobileOrderedItems(items: string[]) {
+  if (!items.includes(HIGHLIGHT_ITEM)) return items;
+  return [HIGHLIGHT_ITEM, ...items.filter((item) => item !== HIGHLIGHT_ITEM)];
+}
 
 const TOTAL = SPEC_CATEGORIES.length;
 const HOLD_FRACTION = 0.62;
@@ -324,7 +334,9 @@ export default function Specifications() {
                     </div>
                     <div className="specs-carousel-bullets">
                       <ul className="specs-content-list">
-                        {cat.items.map((item) => <li key={item}>{item}</li>)}
+                        {mobileOrderedItems(cat.items).map((item) => (
+                          <li key={item} className={item === HIGHLIGHT_ITEM ? "is-highlight" : ""}>{item}</li>
+                        ))}
                       </ul>
                     </div>
                     <div className="specs-carousel-controls">
@@ -358,7 +370,9 @@ export default function Specifications() {
                     <p className="specs-mobile-editorial">{visual.quote}</p>
                   )}
                   <ul className="specs-content-list">
-                    {cat.items.map((item) => <li key={item}>{item}</li>)}
+                    {mobileOrderedItems(cat.items).map((item) => (
+                      <li key={item} className={item === HIGHLIGHT_ITEM ? "is-highlight" : ""}>{item}</li>
+                    ))}
                   </ul>
                 </FadeIn>
               );
@@ -410,15 +424,17 @@ export default function Specifications() {
                       <span className="specs-content-category">{cat.title}</span>
                       <h3 className="specs-content-title">{cat.title}</h3>
                       <ul className="specs-content-list">
-                        {cat.items.map((item) => <li key={item}>{item}</li>)}
+                        {cat.items.map((item) => (
+                          <li key={item} className={item === HIGHLIGHT_ITEM ? "is-highlight" : ""}>{item}</li>
+                        ))}
                       </ul>
                       <div className="specs-detail-composition">
                         {visual.kind === "image" ? (
-                          <img className="specs-detail-image" src={visual.src} alt="" loading="lazy" style={{ objectPosition: visual.focal }} />
+                          <img className="specs-detail-image" src={cat.id === "common" ? evChargingConcept : visual.src} alt={cat.id === "common" ? "AI-generated concept of EV charging in a residential parking bay" : ""} loading="lazy" style={{ objectPosition: cat.id === "common" ? "center" : visual.focal }} />
                         ) : (
                           <div className="specs-detail-editorial" aria-hidden="true"><span>{cat.index}</span></div>
                         )}
-                        <div className="specs-editorial-note"><p>Where life always hits a high note.</p><i /><span>Elysium<br />Celeste</span></div>
+                        <div className="specs-editorial-note"><span>Elysium<br />Celeste</span></div>
                       </div>
                     </div>
                   );

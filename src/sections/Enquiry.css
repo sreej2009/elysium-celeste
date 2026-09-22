@@ -12,7 +12,6 @@
 .enquiry-content { position: relative; z-index: 1; width: 56%; padding-top: clamp(64px, 5.8vw, 90px); padding-bottom: clamp(48px, 5vw, 80px); padding-right: 0; }
 .enquiry-eyebrow { display: block; color: var(--color-bg); }
 .enquiry-title { margin-top: 24px; font-size: clamp(88px, 9.4vw, 160px); font-weight: 300; color: var(--color-bg); letter-spacing: -0.05em; line-height: 0.95; }
-.enquiry-tagline { margin-top: 18px; font-family: var(--font-display); font-size: clamp(24px, 2.45vw, 40px); line-height: 1.2; max-width: 570px; }
 .enquiry-cta-row { position: relative; display: flex; flex-wrap: wrap; align-items: baseline; gap: clamp(24px, 3vw, 44px); margin-top: clamp(70px, 7vw, 108px); color: var(--color-ink); }
 .enquiry-cta-row::before { content: ""; position: absolute; top: -48px; left: 0; width: 40px; height: 1px; background: rgba(250, 248, 244, 0.5); }
 .enquiry-question { font-family: var(--font-display); font-style: italic; font-size: clamp(23px, 2vw, 30px); }
@@ -28,7 +27,6 @@
 @media (max-width: 1100px) {
   .enquiry-content { width: 46%; }
   .enquiry-title { font-size: clamp(78px, 10vw, 104px); }
-  .enquiry-tagline { max-width: 360px; font-size: 25px; }
   .enquiry-cta-row { gap: 18px; }
   .enquiry-question { width: 100%; }
   .enquiry-links { gap: 22px; }
@@ -41,7 +39,6 @@
   .enquiry-scrim { background: linear-gradient(180deg, rgba(20, 36, 60, 0.92), rgba(20, 36, 60, 0.2) 43%, rgba(20, 36, 60, 0.92) 72%, #14243c); }
   .enquiry-content { width: 100%; padding: 44px var(--container-pad) 36px; }
   .enquiry-title { font-size: clamp(76px, 20vw, 112px); margin-top: 20px; }
-  .enquiry-tagline { font-size: 24px; max-width: 320px; }
   .enquiry-cta-row { margin-top: 285px; gap: 20px; color: var(--color-bg); }
   .enquiry-cta-row::before { top: -26px; }
   .enquiry-question { width: 100%; }
