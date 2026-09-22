@@ -36,8 +36,8 @@
   }
 
   .mobile-action-btn.is-whatsapp {
-    background: var(--color-accent);
-    color: var(--color-surface);
+    background: #25d366;
+    color: #ffffff;
   }
 
   .mobile-action-icon {

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
-import buildingDay from "../assets/images/building-day.webp";
+import heroBuilding from "../assets/images/hero-building-price.jpg";
+import heroDesktop from "../assets/images/hero-desktop.png";
 import { CONTACT } from "../data/content";
 import { gsap, ScrollTrigger } from "../lib/smoothScroll";
 import { usePrefersReducedMotion, useIsTouchDevice } from "../lib/hooks";
@@ -17,6 +18,25 @@ function FieldIcon({ kind }: { kind: "person" | "phone" | "mail" | "message" | "
   };
   return <svg className="hero-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true"><path d={paths[kind]} /></svg>;
 }
+
+function MetaIcon({ kind }: { kind: "location" | "floors" | "frame" }) {
+  const paths = {
+    location: "M12 21s7-7.1 7-12a7 7 0 1 0-14 0c0 4.9 7 12 7 12Z M12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z",
+    floors: "M5 21V9l7-5 7 5v12M5 21h14M9 21v-4h6v4M9 9h.01M9 13h.01M15 9h.01M15 13h.01",
+    frame: "M12 3 2 9l10 6 10-6-10-6ZM2 15l10 6 10-6M2 12l10 6 10-6",
+  };
+  return (
+    <svg className="hero-info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true">
+      <path d={paths[kind]} />
+    </svg>
+  );
+}
+
+const HERO_META = [
+  { num: "01", icon: "location" as const, primary: "R.S. Puram", secondary: "Coimbatore" },
+  { num: "02", icon: "floors" as const, primary: "Stilt + 5", secondary: "Stories" },
+  { num: "03", icon: "frame" as const, primary: "RCC Framed", secondary: "Structure" },
+];
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -49,7 +69,7 @@ export default function Hero() {
           ".hero-tagline",
           ".hero-supporting",
           ".hero-top-meta",
-          ".hero-info",
+          ".hero-info-item",
           ".hero-enquiry",
         ],
         { clearProps: "all" }
@@ -62,7 +82,8 @@ export default function Hero() {
       gsap.set(".hero-image", { scale: 1.08 });
       gsap.set([".hero-eyebrow", ".hero-tagline", ".hero-supporting"], { opacity: 0, y: 16 });
       gsap.set(".hero-celeste", { opacity: 0, y: 30, scale: 1.08 });
-      gsap.set([".hero-top-meta", ".hero-info"], { opacity: 0, y: 10 });
+      gsap.set(".hero-top-meta", { opacity: 0, y: 10 });
+      gsap.set(".hero-info-item", { opacity: 0, y: 14 });
       gsap.set(".hero-enquiry", { opacity: 0, y: 40, scale: 0.97 });
 
       const tl = gsap.timeline({ delay: 0.15, defaults: { ease: EASE_CINEMATIC } });
@@ -73,7 +94,8 @@ export default function Hero() {
         .to(".hero-image", { scale: 1, duration: 1.2 }, "<")
         .to(".hero-tagline", { opacity: 1, y: 0, duration: 0.6 }, "-=0.55")
         .to(".hero-supporting", { opacity: 1, y: 0, duration: 0.6 }, "-=0.4")
-        .to([".hero-top-meta", ".hero-info"], { opacity: 1, y: 0, duration: 0.55, stagger: 0.08 }, "-=0.35")
+        .to(".hero-top-meta", { opacity: 1, y: 0, duration: 0.55 }, "-=0.35")
+        .to(".hero-info-item", { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, clearProps: "transform" }, "<")
         .to(".hero-enquiry", { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: EASE_SOFT }, "-=0.3");
     }, section);
 
@@ -168,11 +190,14 @@ export default function Hero() {
     <section id="hero" ref={sectionRef} className="hero">
       <div className="hero-visual">
         <div className="hero-image-frame">
-          <img
-            src={buildingDay}
-            alt="Elysium Celeste, a stilt plus five-story residence, R.S. Puram, Coimbatore"
-            className="hero-image"
-          />
+          <picture>
+            <source media="(min-width: 1024px)" srcSet={heroDesktop} />
+            <img
+              src={heroBuilding}
+              alt="Elysium Celeste, a stilt plus five-story residence, R.S. Puram, Coimbatore, with prices starting from Rs 2.4 Cr"
+              className="hero-image"
+            />
+          </picture>
         </div>
 
         <svg className="hero-ring" viewBox="0 0 100 100" aria-hidden="true">
@@ -185,13 +210,17 @@ export default function Hero() {
         </div>
 
         <aside className="hero-info" aria-label="Celeste location and architecture">
-          <span className="hero-place">
-            R.S. Puram
-            <br />
-            Coimbatore
-          </span>
-          <span className="hero-info-detail">Stilt + 5<br />Stories</span>
-          <span className="hero-info-detail">RCC Framed<br />Structure</span>
+          <span className="hero-info-rule" aria-hidden="true" />
+          {HERO_META.map((item) => (
+            <div className="hero-info-item" key={item.num}>
+              <span className="hero-info-num">{item.num}</span>
+              <MetaIcon kind={item.icon} />
+              <span className="hero-info-text">
+                <span className="hero-info-primary">{item.primary}</span>
+                <span className="hero-info-secondary">{item.secondary}</span>
+              </span>
+            </div>
+          ))}
         </aside>
 
         <div className="hero-type">
@@ -213,11 +242,11 @@ export default function Hero() {
         ) : (
           <>
             <div className="hero-enquiry-head">
-              <h2 className="hero-enquiry-title">Register your interest</h2>
-              <p className="hero-enquiry-sub">
+              <h2 className="hero-enquiry-title">Get Exclusive Property Details</h2>
+              {/* <p className="hero-enquiry-sub">
                 Only 10 homes at Celeste &mdash; leave your number and we&rsquo;ll call you back
                 today.
-              </p>
+              </p> */}
             </div>
 
             <form className="hero-enquiry-form" onSubmit={handleSubmit}>

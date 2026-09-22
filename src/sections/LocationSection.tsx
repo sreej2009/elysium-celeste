@@ -117,10 +117,6 @@ export default function LocationSection() {
             </ul>
           </div>
         </FadeIn>
-
-        {/* Mobile only: closing editorial line, reusing the site's existing
-            recurring tagline (already used in Hero/Enquiry/Specifications). */}
-        <p className="location-mobile-closing" aria-hidden="true">Where life always<br />hits a high note.</p>
       </div>
     </section>
   );

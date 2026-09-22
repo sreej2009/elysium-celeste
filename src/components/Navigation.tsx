@@ -63,7 +63,6 @@ export default function Navigation() {
               aria-label="Toggle menu"
               aria-expanded={open}
             >
-              <span className="nav-menu-btn-label">{open ? "Close" : "Menu"}</span>
               <span className="nav-menu-btn-lines">
                 <span />
                 <span />

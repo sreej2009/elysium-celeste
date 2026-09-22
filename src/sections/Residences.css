@@ -1,4 +1,5 @@
 .residences { background: var(--color-bg); padding-block: clamp(56px, 6vw, 90px) 32px; }
+.residences-mobile { display: none; }
 .residences-head { display: grid; grid-template-columns: 1.8fr 1fr auto; gap: 36px; align-items: end; margin-bottom: 48px; }
 .residences-eyebrow { display: flex; align-items: center; gap: 22px; margin-bottom: 20px; font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
 .residences-eyebrow::after { content: ""; width: 80px; height: 1px; background: var(--color-line-strong); }
@@ -69,26 +70,90 @@
   .residences-area { font-size: 27px; }
   .residences-measurements dd { font-size: 20px; }
 }
-@media (max-width: 600px) {
-  .residences { padding-block: 52px 30px; }
-  .residences-title { font-size: 36px; max-width: 350px; }
-  .residences-intro { font-size: 12px; }
-  .residences-stage { display: flex; flex-direction: column; align-items: stretch; gap: 28px; }
-  .residences-selector { flex-direction: row; justify-content: flex-start; gap: 42px; margin: 0; border-left: 0; border-bottom: 1px solid var(--color-line-strong); padding-bottom: 15px; }
-  .residences-select-btn { display: flex; align-items: center; gap: 10px; padding: 0; }
-  .residences-select-btn::before { display: none; }
-  .residences-select-label { margin: 0; font-size: 8px; }
-  .residences-plan-button { height: 210px; }
-  .residences-details { padding-top: 8px; }
-  .residences-area { font-size: 40px; }
-  .residences-measurements { grid-template-columns: 1fr 1fr; }
-  .residences-detail-copy { display: none; }
-  .residences-preview { display: block; }
-  .residences-preview img { display: none; }
-  .residences-open-plan { width: 100%; min-height: 44px; font-size: 10px; }
-  .residences-footer { margin-top: 28px; }
-  .residences-rooms { gap: 12px; line-height: 1.6; }
-  .residences-rooms span:not(:last-child)::after { margin-left: 12px; }
+
+/* ---------- Mobile (<=768px): horizontal swipe carousel ---------- */
+/* Matches the JS `isMobileStage` boundary — the pinned-scroll crossfade above
+   is fully disabled in JS at this width and replaced by this carousel. */
+@media (max-width: 768px) {
+  .residences { padding-block: 40px 28px; }
+  .residences-head { display: block; margin-bottom: 22px; }
+  .residences-eyebrow { margin-bottom: 12px; gap: 16px; }
+  .residences-eyebrow::after { width: 44px; }
+  .residences-title { font-size: clamp(30px, 8vw, 40px); max-width: 340px; margin-bottom: 10px; }
+  .residences-intro { font-size: 12.5px; max-width: 100%; }
+  .residences-explore { display: none; }
+  .residences-stage { display: none; }
+  .residences-footer { display: none; }
+
+  .residences-mobile { display: block; }
+
+  .residences-mobile-switcher { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--color-line-strong); }
+  .residences-mobile-selector { display: flex; gap: 28px; }
+  .residences-mobile-selector button { display: flex; align-items: center; gap: 8px; color: var(--color-ink-faint); }
+  .residences-mobile-select-number { font-family: var(--font-display); font-size: 30px; line-height: 1; letter-spacing: -.03em; }
+  .residences-mobile-select-label { font-size: 7.5px; line-height: 1.5; letter-spacing: .1em; text-transform: uppercase; }
+  .residences-mobile-selector button.is-active { color: var(--color-accent); }
+
+  .residences-mobile-nav { display: flex; align-items: center; gap: 10px; }
+  .residences-mobile-count { font-size: 10px; letter-spacing: .08em; color: var(--color-ink-faint); }
+  .residences-mobile-nav-btn { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--color-ink); color: var(--color-surface); font-size: 15px; line-height: 1; }
+  .residences-mobile-nav-btn:disabled { background: var(--color-line-strong); color: var(--color-ink-faint); }
+
+  .residences-mobile-rail {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin: 0 -20px;
+    padding: 0 20px 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .residences-mobile-rail::-webkit-scrollbar { display: none; }
+
+  .residences-mobile-card {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    width: 85%;
+    max-width: 360px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line-strong);
+    border-radius: 10px;
+    padding: 16px 16px 18px;
+    opacity: .55;
+    transition: opacity .35s ease;
+  }
+  .residences-mobile-card.is-active { opacity: 1; }
+
+  .residences-mobile-card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .residences-mobile-flat-label { font-size: 9px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--color-ink-faint); }
+  .residences-mobile-view-toggle { display: flex; align-items: center; gap: 10px; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
+  .residences-mobile-view-toggle button { padding-block: 4px; color: var(--color-ink-faint); }
+  .residences-mobile-view-toggle button[aria-pressed="true"] { color: var(--color-accent); font-weight: 600; }
+
+  .residences-mobile-plan-btn { display: block; width: 100%; }
+  .residences-mobile-plan-btn img { display: block; width: 100%; height: 190px; object-fit: contain; }
+
+  .residences-mobile-card-body { margin-top: 4px; }
+  .residences-mobile-type { display: block; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-ink-dim); }
+  .residences-mobile-area { margin-top: 8px; font-size: 30px; letter-spacing: -.03em; }
+  .residences-mobile-area small { font-size: .55em; }
+  .residences-mobile-metric { font-size: 11px; color: var(--color-ink-dim); margin-top: 2px; }
+  .residences-mobile-caption { display: block; margin-top: 8px; font-size: 8px; letter-spacing: .1em; text-transform: uppercase; color: var(--color-ink-dim); }
+
+  .residences-mobile-measurements { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; border-top: 1px solid var(--color-line-strong); margin-top: 14px; padding-top: 12px; }
+  .residences-mobile-measurements dt { font-size: 8px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-ink-faint); }
+  .residences-mobile-measurements dd { font-family: var(--font-display); font-size: 15px; margin: 3px 0 0; }
+
+  .residences-mobile-rooms { display: flex; flex-wrap: wrap; gap: 12px 14px; margin-top: 14px; }
+  .residences-mobile-room { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 52px; text-align: center; }
+  .residences-room-icon { width: 18px; height: 18px; color: var(--color-ink-dim); }
+  .residences-mobile-room span { font-size: 6.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--color-ink-faint); line-height: 1.25; }
+
+  .residences-mobile-view-plan { width: 100%; margin-top: 16px; min-height: 42px; background: var(--color-ink); color: var(--color-surface); display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; border-radius: 6px; }
+
+  .residences-mobile-closing { margin-top: 22px; font-family: var(--font-display); font-style: italic; font-size: 17px; line-height: 1.3; }
+
   .residences-viewer { padding: 18px 12px; }
   .residences-viewer-head { font-size: 9px; letter-spacing: .05em; }
 }

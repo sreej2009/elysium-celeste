@@ -51,20 +51,24 @@
 .nav-enquire {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 11px;
+  gap: 9px;
+  padding: 11px 22px;
+  border-radius: 999px;
+  border: 1px solid var(--color-ink);
+  background: var(--color-ink);
+  font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-ink-dim);
-  padding-bottom: 4px;
-  border-bottom: 1px solid var(--color-line-strong);
-  transition: color 0.35s ease, border-color 0.35s ease;
+  color: var(--color-surface);
+  transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease, transform 0.35s ease;
 }
 
 .nav-enquire:hover {
-  color: var(--color-accent);
+  background: var(--color-accent);
   border-color: var(--color-accent);
+  color: var(--color-surface);
+  transform: translateY(-1px);
 }
 
 .nav-enquire-arrow {
@@ -80,20 +84,6 @@
 .nav-menu-btn {
   display: flex;
   align-items: center;
-  gap: 12px;
-}
-
-.nav-menu-btn-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--color-ink);
-  transition: transform 0.35s var(--ease-soft);
-}
-
-.nav-menu-btn:hover .nav-menu-btn-label {
-  transform: translateX(-3px);
 }
 
 .nav-menu-btn-lines {
@@ -201,9 +191,6 @@
   }
   .nav-elysium {
     font-size: 11px;
-  }
-  .nav-menu-btn-label {
-    display: none;
   }
   .nav-menu-btn-lines {
     width: 24px;

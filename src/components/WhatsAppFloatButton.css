@@ -14,15 +14,15 @@
     height: 52px;
     padding: 0 16px;
     border-radius: 999px;
-    background: var(--color-ink);
-    color: var(--color-surface);
+    background: #25d366;
+    color: #ffffff;
     box-shadow: 0 16px 40px rgba(33, 31, 27, 0.22);
     overflow: hidden;
     transition: background 0.35s ease, box-shadow 0.35s ease;
   }
 
   .whatsapp-float:hover {
-    background: var(--color-accent);
+    background: #1ebe5c;
     box-shadow: 0 20px 48px rgba(33, 31, 27, 0.28);
   }
 

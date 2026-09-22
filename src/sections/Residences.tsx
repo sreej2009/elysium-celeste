@@ -23,6 +23,19 @@ const area = (value: number) => value.toLocaleString("en-IN", { maximumFractionD
 // Scroll progress (0-1 across the pinned distance) at which 3 BHK becomes dominant.
 const TRANSITION_MIDPOINT = 0.575;
 
+const FLAT_ORDER: ApartmentType["id"][] = ["4bhk", "3bhk"];
+
+function RoomIcon({ room }: { room: string }) {
+  const key = room.toLowerCase();
+  let d = "M4 20h16M6 20V9l6-4 6 4v11"; // default: foyer/door
+  if (key.includes("living")) d = "M4 18v-4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4M4 18h16M4 18v2M20 18v2M6 12V9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3";
+  else if (key.includes("balcony")) d = "M4 10h16M6 10v10M18 10v10M9.5 10v10M14.5 10v10M4 20h16";
+  else if (key.includes("bedroom")) d = "M3 19v-7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v7M3 19h18M3 19v2M21 19v2M5 10V6a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v4";
+  else if (key.includes("dining")) d = "M4 21V10l8-6 8 6v11M9 21v-6h6v6M4 21h16";
+  else if (key.includes("kitchen")) d = "M6 3v6a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V3M8 11v10M16 3c-1.7 0-3 1.6-3 4s1.3 4 3 4v10";
+  return <svg className="residences-room-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true"><path d={d} /></svg>;
+}
+
 export default function Residences() {
   const [mode, setMode] = useState<"2d" | "3d">("3d");
   const [dominant, setDominant] = useState<ApartmentType["id"]>("4bhk");
@@ -41,6 +54,9 @@ export default function Residences() {
   const selectBtn4Ref = useRef<HTMLButtonElement>(null);
   const selectBtn3Ref = useRef<HTMLButtonElement>(null);
   const pinTriggerRef = useRef<ScrollTrigger | null>(null);
+  const mobileRailRef = useRef<HTMLDivElement>(null);
+  const mobileCardRefs = useRef<(HTMLElement | null)[]>([]);
+  const mobileSyncingFromScroll = useRef(false);
   const reducedMotion = usePrefersReducedMotion();
   const isMobileStage = useMediaQuery("(max-width: 768px)");
 
@@ -60,6 +76,55 @@ export default function Residences() {
     if (lenis) lenis.scrollTo(targetScroll, { duration: 1.2 });
     else window.scrollTo({ top: targetScroll, behavior: "smooth" });
   };
+
+  // Scroll the mobile rail to the given flat's card (native scroll-snap carousel).
+  const goMobile = (id: ApartmentType["id"]) => {
+    const railEl = mobileRailRef.current;
+    const cardEl = mobileCardRefs.current[FLAT_ORDER.indexOf(id)];
+    if (!railEl || !cardEl) {
+      setDominant(id);
+      return;
+    }
+    mobileSyncingFromScroll.current = true;
+    railEl.scrollTo({ left: cardEl.offsetLeft - railEl.offsetLeft, behavior: "smooth" });
+    setDominant(id);
+  };
+
+  // Keep `dominant` synced when the user swipes the mobile rail by hand.
+  useEffect(() => {
+    if (!isMobileStage) return;
+    const railEl = mobileRailRef.current;
+    if (!railEl) return;
+
+    let settleTimer: ReturnType<typeof setTimeout> | null = null;
+    const onScroll = () => {
+      if (settleTimer) clearTimeout(settleTimer);
+      settleTimer = setTimeout(() => {
+        if (mobileSyncingFromScroll.current) {
+          mobileSyncingFromScroll.current = false;
+          return;
+        }
+        const railRect = railEl.getBoundingClientRect();
+        let closest = 0;
+        let closestDist = Infinity;
+        mobileCardRefs.current.forEach((cardEl, i) => {
+          if (!cardEl) return;
+          const dist = Math.abs(cardEl.getBoundingClientRect().left - railRect.left);
+          if (dist < closestDist) {
+            closestDist = dist;
+            closest = i;
+          }
+        });
+        setDominant(FLAT_ORDER[closest]);
+      }, 120);
+    };
+
+    railEl.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      railEl.removeEventListener("scroll", onScroll);
+      if (settleTimer) clearTimeout(settleTimer);
+    };
+  }, [isMobileStage]);
 
   useScrollReveal(planButtonRef, {
     from: { opacity: 0, scale: 0.92, rotationX: 8 },
@@ -84,8 +149,9 @@ export default function Residences() {
 
   // Cinematic pinned scroll: 4 BHK holds, transitions into 3 BHK, then holds again
   // before the section releases. Scrub-driven, so it scrubs naturally in reverse too.
+  // Desktop only — mobile uses its own horizontal swipe carousel instead of a pin.
   useEffect(() => {
-    if (reducedMotion) return;
+    if (reducedMotion || isMobileStage) return;
     const section = sectionRef.current;
     const plan4 = plan4Ref.current;
     const plan3 = plan3Ref.current;
@@ -244,6 +310,103 @@ export default function Residences() {
           <img src={bedroom} alt="Celeste bedroom interior" loading="lazy" />
           <button className="residences-open-plan" onClick={openPlan}>View floor plan <span aria-hidden="true">→</span></button>
         </div>
+      </div>
+
+      {/* Mobile only (<=768px): horizontal swipe carousel between Flat A and Flat B,
+          replacing the desktop pinned-scroll crossfade above (hidden via CSS here). */}
+      <div className="residences-mobile">
+        <div className="residences-mobile-switcher">
+          <div className="residences-mobile-selector" role="group" aria-label="Residence type">
+            {FLAT_ORDER.map((id) => (
+              <button
+                key={id}
+                className={dominant === id ? "is-active" : ""}
+                aria-pressed={dominant === id}
+                onClick={() => goMobile(id)}
+              >
+                <span className="residences-mobile-select-number">{APARTMENTS[id].bhk}</span>
+                <span className="residences-mobile-select-label">BHK<br />Residence</span>
+              </button>
+            ))}
+          </div>
+          <div className="residences-mobile-nav">
+            <span className="residences-mobile-count">
+              {String(FLAT_ORDER.indexOf(dominant) + 1).padStart(2, "0")} / {String(FLAT_ORDER.length).padStart(2, "0")}
+            </span>
+            <button
+              className="residences-mobile-nav-btn"
+              onClick={() => goMobile(FLAT_ORDER[Math.max(0, FLAT_ORDER.indexOf(dominant) - 1)])}
+              disabled={dominant === FLAT_ORDER[0]}
+              aria-label="Previous residence"
+            >
+              &#8249;
+            </button>
+            <button
+              className="residences-mobile-nav-btn"
+              onClick={() => goMobile(FLAT_ORDER[Math.min(FLAT_ORDER.length - 1, FLAT_ORDER.indexOf(dominant) + 1)])}
+              disabled={dominant === FLAT_ORDER[FLAT_ORDER.length - 1]}
+              aria-label="Next residence"
+            >
+              &#8250;
+            </button>
+          </div>
+        </div>
+
+        <div className="residences-mobile-rail" ref={mobileRailRef} role="group" aria-label="Residence floor plans, swipe to browse">
+          {FLAT_ORDER.map((id, i) => {
+            const flat = APARTMENTS[id];
+            return (
+              <article
+                key={id}
+                ref={(el) => { mobileCardRefs.current[i] = el; }}
+                className={`residences-mobile-card ${dominant === id ? "is-active" : ""}`}
+              >
+                <div className="residences-mobile-card-head">
+                  <span className="residences-mobile-flat-label">{flat.flatCode}</span>
+                  <div className="residences-mobile-view-toggle" role="group" aria-label="Floor plan view">
+                    {(["2d", "3d"] as const).map((view) => (
+                      <button key={view} aria-pressed={mode === view} onClick={() => setMode(view)}>
+                        {view === "2d" ? "2D Plan" : "3D View"}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <button
+                  className="residences-mobile-plan-btn"
+                  onClick={() => { setDominant(id); openPlan(); }}
+                  aria-label={`Enlarge ${flat.flatCode}, ${flat.label}, official ${mode.toUpperCase()} floor plan`}
+                >
+                  <img src={PLANS[id][mode]} alt={`${flat.flatCode}, ${flat.label}, official ${mode.toUpperCase()} floor plan`} loading="lazy" />
+                </button>
+                <div className="residences-mobile-card-body">
+                  <span className="residences-mobile-type">{flat.label} Residence</span>
+                  <h3 className="residences-mobile-area">
+                    {area(flat.superBuiltUp.sqft)} <small>Sq.Ft</small>
+                  </h3>
+                  <p className="residences-mobile-metric">({flat.superBuiltUp.sqm} M&sup2;)</p>
+                  <span className="residences-mobile-caption">Super built-up area</span>
+                  <dl className="residences-mobile-measurements">
+                    <div><dt>Built-up</dt><dd>{area(flat.builtUp)} Sq.Ft</dd></div>
+                    <div><dt>Carpet</dt><dd>{area(flat.carpet)} Sq.Ft</dd></div>
+                  </dl>
+                  <div className="residences-mobile-rooms">
+                    {flat.rooms.map((room) => (
+                      <div key={room} className="residences-mobile-room">
+                        <RoomIcon room={room} />
+                        <span>{room}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <button className="residences-mobile-view-plan" onClick={() => { setDominant(id); openPlan(); }}>
+                    View floor plan <span aria-hidden="true">→</span>
+                  </button>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        <p className="residences-mobile-closing">A home<br />that moves with you.</p>
       </div>
 
       <footer className="residences-footer">
