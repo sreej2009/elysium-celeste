@@ -98,14 +98,14 @@ export default function EnquiryModal() {
             <form onSubmit={handleSubmit}>
               <div className="enquiry-modal-row">
                 <label className="enquiry-field">
-                  <span>Your Name</span>
+                  <span className="sr-only">Your Name</span>
                   <span className="enquiry-field-wrap">
                     <FieldIcon kind="person" />
                     <input type="text" name="name" placeholder="Your Name" required />
                   </span>
                 </label>
                 <label className="enquiry-field">
-                  <span>Phone Number</span>
+                  <span className="sr-only">Phone Number</span>
                   <span className="enquiry-field-wrap">
                     <FieldIcon kind="phone" />
                     <input type="tel" name="phone" placeholder="Phone Number" required />
@@ -115,14 +115,14 @@ export default function EnquiryModal() {
 
               <div className="enquiry-modal-row">
                 <label className="enquiry-field">
-                  <span>Email Address</span>
+                  <span className="sr-only">Email Address</span>
                   <span className="enquiry-field-wrap">
                     <FieldIcon kind="mail" />
                     <input type="email" name="email" placeholder="Email Address" />
                   </span>
                 </label>
                 <label className="enquiry-field">
-                  <span>City</span>
+                  <span className="sr-only">City</span>
                   <span className="enquiry-field-wrap">
                     <FieldIcon kind="location" />
                     <input type="text" name="city" placeholder="City" />

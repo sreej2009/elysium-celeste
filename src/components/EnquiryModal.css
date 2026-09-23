@@ -246,8 +246,11 @@
 
 @media (max-width: 640px) {
   .enquiry-modal-panel { width: 92vw; padding: 32px 22px; border-radius: 8px; }
-  .enquiry-modal-row { grid-template-columns: 1fr; gap: 16px; }
+  .enquiry-modal-row { grid-template-columns: 1fr; gap: 12px; }
   .enquiry-modal-head h3 { font-size: 26px; }
   .enquiry-modal-close { top: 18px; right: 18px; }
   .enquiry-privacy { flex-wrap: wrap; }
+  .enquiry-field-wrap input { height: 46px; }
+  .enquiry-modal-interest-toggle button { height: 44px; }
+  .enquiry-modal-panel form { gap: 14px; }
 }
