@@ -43,9 +43,9 @@ export default function Enquiry() {
         </FadeIn>
 
         <FadeIn as="div" className="enquiry-details" delay={220}>
-          <a href={`tel:${CONTACT.phoneMobileHref}`}>{CONTACT.phoneMobileDisplay}</a>
+          {/* <a href={`tel:${CONTACT.phoneMobileHref}`}>{CONTACT.phoneMobileDisplay}</a>
           <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
-          <a href={CONTACT.mapsUrl} target="_blank" rel="noopener noreferrer">Ponnurangam Road East, R.S. Puram</a>
+          <a href={CONTACT.mapsUrl} target="_blank" rel="noopener noreferrer">Ponnurangam Road East, R.S. Puram</a> */}
           <span className="enquiry-office-address">{CONTACT.address}</span>
         </FadeIn>
       </div>

@@ -39,8 +39,18 @@ export function getLenis() {
 }
 
 export function scrollToId(id: string) {
-  const el = document.getElementById(id);
+  let el = document.getElementById(id);
   if (!el) return;
+  // A target that's hidden at the current breakpoint (e.g. a desktop-only
+  // layer under a mobile carousel) has zero size, so scrolling to it lands
+  // in the wrong place. Fall back to its nearest visible ancestor instead.
+  if (el.offsetParent === null) {
+    let ancestor: HTMLElement | null = el.parentElement;
+    while (ancestor && ancestor.offsetParent === null) {
+      ancestor = ancestor.parentElement;
+    }
+    el = ancestor ?? el;
+  }
   if (lenis) {
     lenis.scrollTo(el, { offset: -80, duration: 1.4 });
   } else {

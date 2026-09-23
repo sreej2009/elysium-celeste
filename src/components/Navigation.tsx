@@ -10,7 +10,7 @@ const LINKS = [
   { label: "Floor Plan", id: "floorplan" },
   { label: "Specifications", id: "specifications" },
   { label: "Interiors", id: "materials" },
-  { label: "Gallery", id: "gallery" },
+  { label: "Completed Projects", id: "gallery" },
   { label: "Enquiry", id: "enquiry" },
 ];
 
