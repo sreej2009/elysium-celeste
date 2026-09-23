@@ -35,8 +35,9 @@ const HERO_META = [
   {
     num: "01",
     icon: "location" as const,
-    primary: "Ponnurangam Rd East",
+    primary: "Ponnurangam Road East",
     secondary: "R.S. Puram",
+    boldSecondary: true,
     href: CONTACT.mapsUrl,
   },
   { num: "02", icon: "floors" as const, primary: "Stilt + 5", secondary: "Stories" },
@@ -226,7 +227,7 @@ export default function Hero() {
                 <MetaIcon kind={item.icon} />
                 <span className="hero-info-text">
                   <span className="hero-info-primary">{item.primary}</span>
-                  <span className="hero-info-secondary">{item.secondary}</span>
+                  <span className={`hero-info-secondary ${item.boldSecondary ? "is-bold" : ""}`}>{item.secondary}</span>
                 </span>
               </Tag>
             );
@@ -310,9 +311,6 @@ export default function Hero() {
 
               <button type="submit" className="hero-enquiry-submit">
                 <span>Let&rsquo;s Talk 1-on-1</span>
-                <span className="hero-enquiry-submit-arrow" aria-hidden="true">
-                  &#8594;
-                </span>
               </button>
             </form>
           </>

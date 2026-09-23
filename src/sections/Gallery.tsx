@@ -244,7 +244,7 @@ export default function Gallery() {
         <div className="gallery-head">
           <FadeIn className="gallery-heading">
             <span className="eyebrow is-accent">Completed Projects</span>
-            <h2 className="gallery-title">Homes delivered across Coimbatore.</h2>
+            <h2 className="gallery-title">Our projects across the city.</h2>
           </FadeIn>
           <div className="gallery-controls">
             <span className="gallery-index" aria-live="polite" aria-atomic="true">

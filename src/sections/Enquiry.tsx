@@ -45,7 +45,7 @@ export default function Enquiry() {
         <FadeIn as="div" className="enquiry-details" delay={220}>
           <a href={`tel:${CONTACT.phoneMobileHref}`}>{CONTACT.phoneMobileDisplay}</a>
           <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
-          <a href={CONTACT.mapsUrl} target="_blank" rel="noopener noreferrer">Ponnurangam Rd East, R.S. Puram</a>
+          <a href={CONTACT.mapsUrl} target="_blank" rel="noopener noreferrer">Ponnurangam Road East, R.S. Puram</a>
           <span className="enquiry-office-address">{CONTACT.address}</span>
         </FadeIn>
       </div>
@@ -55,9 +55,9 @@ export default function Enquiry() {
         href={CONTACT.mapsUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Open Elysium Celeste's location, Ponnurangam Rd East, R.S. Puram, in Google Maps"
+        aria-label="Open Elysium Celeste's location, Ponnurangam Road East, R.S. Puram, in Google Maps"
       >
-        <span>Ponnurangam Rd East<br />R.S. Puram</span>
+        <span>Ponnurangam Road East<br />R.S. Puram</span>
         <span className="enquiry-coordinates">
           {CONTACT.coordinates.split(" N ").map((part, i) => (
             <span key={part}>{part}{i === 0 ? " N" : ""}</span>

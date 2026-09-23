@@ -20,7 +20,7 @@
 .enquiry-links .edge-link:hover { color: var(--color-accent); }
 .enquiry-details { display: flex; flex-wrap: wrap; gap: 16px 24px; max-width: 630px; margin-top: 44px; font-size: 12px; line-height: 1.65; color: var(--color-ink); }
 .enquiry-details a:hover { text-decoration: underline; text-underline-offset: 4px; }
-.enquiry-office-address { flex-basis: 100%; max-width: 480px; font-size: 10px; opacity: 0.8; }
+.enquiry-office-address { flex-basis: 100%; max-width: 520px; font-size: 17px; line-height: 1.6; opacity: 1; }
 .enquiry-location { display: block; position: absolute; z-index: 1; top: clamp(64px, 5.8vw, 90px); right: var(--container-pad); width: 115px; font-size: 10px; line-height: 1.8; letter-spacing: 0.18em; text-transform: uppercase; text-shadow: 0 1px 10px #152038; color: inherit; text-decoration: none; transition: opacity 0.25s ease; }
 .enquiry-location:hover { opacity: 0.75; }
 .enquiry-coordinates { display: flex; flex-direction: column; margin-top: 32px; letter-spacing: 0.07em; }

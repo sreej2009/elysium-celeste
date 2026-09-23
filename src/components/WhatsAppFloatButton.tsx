@@ -2,8 +2,8 @@ import { CONTACT } from "../data/content";
 import "./WhatsAppFloatButton.css";
 
 export default function WhatsAppFloatButton() {
-  const whatsappHref = `https://wa.me/${CONTACT.phoneMobileHref.replace("+", "")}?text=${encodeURIComponent(
-    "Hi, I'm interested in Elysium Celeste."
+  const whatsappHref = `https://wa.me/${CONTACT.whatsappHref.replace("+", "")}?text=${encodeURIComponent(
+    CONTACT.whatsappMessage
   )}`;
 
   return (

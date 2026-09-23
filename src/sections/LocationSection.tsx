@@ -98,7 +98,7 @@ export default function LocationSection() {
             href={CONTACT.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Open Elysium Celeste's location, Ponnurangam Rd East, R.S. Puram, in Google Maps"
+            aria-label="Open Elysium Celeste's location, Ponnurangam Road East, R.S. Puram, in Google Maps"
           >
             <div className="location-map" aria-hidden="true">
               <svg viewBox="0 0 160 160" fill="none">
@@ -114,7 +114,7 @@ export default function LocationSection() {
                 <circle className="location-map-pin-center" cx="80" cy="77" r="3" />
               </svg>
             </div>
-            <span className="location-map-label">Ponnurangam Rd East<br />R.S. Puram</span>
+            <span className="location-map-label">Ponnurangam Road East<br />R.S. Puram</span>
           </a>
           <div className="location-nearby">
             <h3 className="location-nearby-label">Nearby</h3>

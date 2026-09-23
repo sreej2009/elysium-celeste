@@ -28,18 +28,21 @@ export const CONTACT = {
   phonePrimaryDisplay: "+91 422 - 3527770 / 3517714",
   phoneMobileDisplay: "+91 8144 000 999",
   phoneMobileHref: "+918144000999",
+  whatsappHref: "+919500979241",
   email: "info@elysium.in",
   website: "www.elysium.in",
   address: "B-2, Elysium Towers, Door No: 21, ATT Colony, Coimbatore - 641018, Tamil Nadu, India.",
   coordinates: `11°0'43" N 76°57'15" E`,
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=Elysium+Celeste+Coimbatore",
+  whatsappMessage:
+    "Hi, I was exploring Elysium Celeste and would like to know more. Could you share the details?",
 };
 
 export const LOCATION_LANDMARKS = [
   "Brookfields Mall",
   "Ganga Hospital",
   "KMCH City Centre",
-  "Eye Foundation",
+  "The Eye Foundation",
   "Railway Station",
 ];
 

@@ -4,8 +4,8 @@ import "./MobileActionBar.css";
 
 export default function MobileActionBar() {
   const { openModal } = useEnquiryModal();
-  const whatsappHref = `https://wa.me/${CONTACT.phoneMobileHref.replace("+", "")}?text=${encodeURIComponent(
-    "Hi, I'm interested in Elysium Celeste."
+  const whatsappHref = `https://wa.me/${CONTACT.whatsappHref.replace("+", "")}?text=${encodeURIComponent(
+    CONTACT.whatsappMessage
   )}`;
 
   return (

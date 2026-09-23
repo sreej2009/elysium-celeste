@@ -126,6 +126,10 @@ a.hero-info-item { cursor: pointer; }
   text-transform: uppercase;
   color: #6e6b65;
 }
+.hero-info-secondary.is-bold {
+  font-weight: 700;
+  color: #242321;
+}
 
 .hero-type {
   position: absolute;
@@ -274,7 +278,6 @@ a.hero-info-item { cursor: pointer; }
   transition: background 0.25s;
 }
 .hero-enquiry-submit:hover { background: var(--color-accent); }
-.hero-enquiry-submit-arrow { font-size: 17px; }
 .hero-enquiry-thanks { min-height: 150px; display: flex; align-items: center; justify-content: center; gap: 20px; }
 .hero-enquiry-thanks-title { font-family: var(--font-display); font-size: 28px; }
 
@@ -392,7 +395,6 @@ a.hero-info-item { cursor: pointer; }
   .hero-enquiry-interest-toggle button { min-height: 46px; border-radius: 7px; font-size: 14px; font-weight: 400; }
   .hero-enquiry-message input { min-height: 70px; font-size: 12px; }
   .hero-enquiry-submit { width: 100%; min-height: 55px; padding: 10px; border-radius: 8px; background: var(--color-accent); white-space: normal; font-size: 10px; letter-spacing: .08em; gap: 10px; }
-  .hero-enquiry-submit-arrow { font-size: 22px; }
   .hero-mobile-footer { display: flex; align-items: center; gap: 15px; margin: 29px 24px 0; font-size: 9px; letter-spacing: .23em; text-transform: uppercase; color: var(--color-ink-faint); }
   .hero-mobile-footer i { flex: 1; height: 1px; background: var(--color-line-strong); }
   .nav:not(.is-scrolled):not(.is-open-state) { padding: 10px 20px; }
