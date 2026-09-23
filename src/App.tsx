@@ -7,7 +7,6 @@ import WhatsAppFloatButton from "./components/WhatsAppFloatButton";
 import Hero from "./sections/Hero";
 import LocationSection from "./sections/LocationSection";
 import Residences from "./sections/Residences";
-import Availability from "./sections/Availability";
 import Specifications from "./sections/Specifications";
 import MaterialStory from "./sections/MaterialStory";
 import Gallery from "./sections/Gallery";
@@ -47,7 +46,6 @@ export default function App() {
         <Hero />
         <LocationSection />
         <Residences />
-        <Availability />
         <Specifications />
         <MaterialStory />
         <Gallery />

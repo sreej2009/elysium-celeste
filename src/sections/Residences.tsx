@@ -37,7 +37,6 @@ function RoomIcon({ room }: { room: string }) {
 }
 
 export default function Residences() {
-  const [mode, setMode] = useState<"2d" | "3d">("3d");
   const [dominant, setDominant] = useState<ApartmentType["id"]>("4bhk");
   const viewer = useRef<HTMLDialogElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -61,7 +60,9 @@ export default function Residences() {
   const isMobileStage = useMediaQuery("(max-width: 768px)");
 
   const active = APARTMENTS[dominant];
-  const image = PLANS[dominant][mode];
+  // The floor plan viewer always opens on the official 2D plan; the main
+  // hero visual on the page always shows the 3D render.
+  const viewerImage = PLANS[dominant]["2d"];
   const openPlan = () => viewer.current?.showModal();
 
   const jumpTo = (id: ApartmentType["id"]) => {
@@ -264,15 +265,12 @@ export default function Residences() {
         </FadeIn>
 
         <div id="floorplan" className="residences-visual">
-          <div className="residences-view-toggle" role="group" aria-label="Floor plan view">
-            {(["2d", "3d"] as const).map(view => (
-              <button key={view} aria-pressed={mode === view} onClick={() => setMode(view)}>{view === "2d" ? "2D Plan" : "3D View"}</button>
-            ))}
+          <div className="residences-view-toggle" role="presentation">
             <span>{active.flatCode}</span>
           </div>
-          <button ref={planButtonRef} className="residences-plan-button" onClick={openPlan} aria-label={`Enlarge ${active.flatCode}, ${active.label}, official ${mode.toUpperCase()} floor plan`}>
-            <img ref={plan4Ref} src={PLANS["4bhk"][mode]} alt={`${APARTMENTS["4bhk"].flatCode}, ${APARTMENTS["4bhk"].label}, official ${mode.toUpperCase()} floor plan`} className="residences-plan-img" />
-            <img ref={plan3Ref} src={PLANS["3bhk"][mode]} alt={`${APARTMENTS["3bhk"].flatCode}, ${APARTMENTS["3bhk"].label}, official ${mode.toUpperCase()} floor plan`} className="residences-plan-img" />
+          <button ref={planButtonRef} className="residences-plan-button" onClick={openPlan} aria-label={`Enlarge ${active.flatCode}, ${active.label}, official 3D floor plan`}>
+            <img ref={plan4Ref} src={PLANS["4bhk"]["3d"]} alt={`${APARTMENTS["4bhk"].flatCode}, ${APARTMENTS["4bhk"].label}, official 3D floor plan`} className="residences-plan-img" />
+            <img ref={plan3Ref} src={PLANS["3bhk"]["3d"]} alt={`${APARTMENTS["3bhk"].flatCode}, ${APARTMENTS["3bhk"].label}, official 3D floor plan`} className="residences-plan-img" />
           </button>
           <div className="residences-plan-note-wrap">
             <span ref={note4Ref} className="residences-plan-note">{APARTMENTS["4bhk"].flatCode} <span aria-hidden="true">/</span> {APARTMENTS["4bhk"].label} residence</span>
@@ -284,7 +282,6 @@ export default function Residences() {
           <div ref={details4Ref} className="residences-details">
             <span className="residences-detail-label">{APARTMENTS["4bhk"].label} Residence</span>
             <h3 className="residences-area">{area(APARTMENTS["4bhk"].superBuiltUp.sqft)} <span>Sq.Ft</span></h3>
-            <p className="residences-metric">({APARTMENTS["4bhk"].superBuiltUp.sqm} M²)</p>
             <span className="residences-area-caption">Super built-up area</span>
             <dl className="residences-measurements">
               <div><dt>Built-up</dt><dd>{area(APARTMENTS["4bhk"].builtUp)} Sq.Ft</dd></div>
@@ -295,7 +292,6 @@ export default function Residences() {
           <div ref={details3Ref} className="residences-details">
             <span className="residences-detail-label">{APARTMENTS["3bhk"].label} Residence</span>
             <h3 className="residences-area">{area(APARTMENTS["3bhk"].superBuiltUp.sqft)} <span>Sq.Ft</span></h3>
-            <p className="residences-metric">({APARTMENTS["3bhk"].superBuiltUp.sqm} M²)</p>
             <span className="residences-area-caption">Super built-up area</span>
             <dl className="residences-measurements">
               <div><dt>Built-up</dt><dd>{area(APARTMENTS["3bhk"].builtUp)} Sq.Ft</dd></div>
@@ -363,27 +359,19 @@ export default function Residences() {
               >
                 <div className="residences-mobile-card-head">
                   <span className="residences-mobile-flat-label">{flat.flatCode}</span>
-                  <div className="residences-mobile-view-toggle" role="group" aria-label="Floor plan view">
-                    {(["2d", "3d"] as const).map((view) => (
-                      <button key={view} aria-pressed={mode === view} onClick={() => setMode(view)}>
-                        {view === "2d" ? "2D Plan" : "3D View"}
-                      </button>
-                    ))}
-                  </div>
                 </div>
                 <button
                   className="residences-mobile-plan-btn"
                   onClick={() => { setDominant(id); openPlan(); }}
-                  aria-label={`Enlarge ${flat.flatCode}, ${flat.label}, official ${mode.toUpperCase()} floor plan`}
+                  aria-label={`Enlarge ${flat.flatCode}, ${flat.label}, official 3D floor plan`}
                 >
-                  <img src={PLANS[id][mode]} alt={`${flat.flatCode}, ${flat.label}, official ${mode.toUpperCase()} floor plan`} loading="lazy" />
+                  <img src={PLANS[id]["3d"]} alt={`${flat.flatCode}, ${flat.label}, official 3D floor plan`} loading="lazy" />
                 </button>
                 <div className="residences-mobile-card-body">
                   <span className="residences-mobile-type">{flat.label} Residence</span>
                   <h3 className="residences-mobile-area">
                     {area(flat.superBuiltUp.sqft)} <small>Sq.Ft</small>
                   </h3>
-                  <p className="residences-mobile-metric">({flat.superBuiltUp.sqm} M&sup2;)</p>
                   <span className="residences-mobile-caption">Super built-up area</span>
                   <dl className="residences-mobile-measurements">
                     <div><dt>Built-up</dt><dd>{area(flat.builtUp)} Sq.Ft</dd></div>
@@ -416,10 +404,10 @@ export default function Residences() {
 
       <dialog ref={viewer} className="residences-viewer" aria-label={`${active.label} floor plan enlarged`} onClick={event => { if (event.target === event.currentTarget) viewer.current?.close(); }}>
         <div className="residences-viewer-head">
-          <span>{active.flatCode} · {active.label} · {mode.toUpperCase()} {mode === "2d" ? "Plan" : "View"}</span>
+          <span>{active.flatCode} · {active.label} · 2D Plan</span>
           <button onClick={() => viewer.current?.close()} aria-label="Close floor plan">Close ×</button>
         </div>
-        <img src={image} alt={`${active.flatCode}, ${active.label}, official ${mode.toUpperCase()} floor plan`} />
+        <img src={viewerImage} alt={`${active.flatCode}, ${active.label}, official 2D floor plan`} />
       </dialog>
     </section>
   );

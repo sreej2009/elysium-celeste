@@ -36,7 +36,7 @@ export default function LocationSection() {
         <div className="location-copy-col">
           <FadeIn className="location-heading">
             <span className="eyebrow is-accent">The Location</span>
-            <h2 id="location-title" className="location-title">R.S.<br />Puram.</h2>
+            <h2 id="location-title" className="location-title">R.S. Puram.</h2>
             <span className="location-subtitle">The Heart of Coimbatore</span>
           </FadeIn>
           {/* Mobile only: the same "vibrant neighbourhood" line as the desktop
@@ -93,7 +93,13 @@ export default function LocationSection() {
               <span key={part}>{part}{i === 0 ? " N" : ""}</span>
             ))}
           </div>
-          <div className="location-map-block">
+          <a
+            className="location-map-block"
+            href={CONTACT.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open Elysium Celeste's location, Ponnurangam Rd East, R.S. Puram, in Google Maps"
+          >
             <div className="location-map" aria-hidden="true">
               <svg viewBox="0 0 160 160" fill="none">
                 <defs>
@@ -108,8 +114,8 @@ export default function LocationSection() {
                 <circle className="location-map-pin-center" cx="80" cy="77" r="3" />
               </svg>
             </div>
-            <span className="location-map-label">R.S. Puram<br />Coimbatore</span>
-          </div>
+            <span className="location-map-label">Ponnurangam Rd East<br />R.S. Puram</span>
+          </a>
           <div className="location-nearby">
             <h3 className="location-nearby-label">Nearby</h3>
             <ul className="location-nearby-list">

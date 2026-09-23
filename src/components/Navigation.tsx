@@ -8,7 +8,6 @@ const LINKS = [
   { label: "Location", id: "location" },
   { label: "Residences", id: "residences" },
   { label: "Floor Plan", id: "floorplan" },
-  { label: "Availability", id: "availability" },
   { label: "Specifications", id: "specifications" },
   { label: "Interiors", id: "materials" },
   { label: "Gallery", id: "gallery" },

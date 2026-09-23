@@ -21,8 +21,10 @@
 }
 
 .site-footer-logo {
-  height: 46px;
+  height: 64px;
   width: auto;
+  align-self: flex-start;
+  object-fit: contain;
 }
 
 .site-footer-name {

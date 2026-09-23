@@ -18,14 +18,17 @@ import "./Gallery.css";
 // Coimbatore — sourced from https://elysium.in/completed/. Villa Primero and
 // Casa Del Sol share one photo on the source site itself (Casa Del Sol has no
 // separate image there), so that repetition is preserved rather than invented.
+// Slide order per feedback: positions 4, 5 and 7 rotate (old 5 -> 4,
+// old 7 -> 5, old 4 -> 7); each project keeps its own real photo, only the
+// carousel position changes.
 const ITEMS = [
   { src: address, name: "Elysium The Address", location: "Race Course, Coimbatore" },
   { src: boulevard, name: "Elysium Boulevard", location: "ATT Colony, Coimbatore" },
   { src: villaPrimero, name: "Elysium Villa Primero", location: "Saravanampatti, Coimbatore" },
-  { src: villaPrimero, name: "Elysium Casa Del Sol", location: "Saravanampatti, Coimbatore" },
   { src: goldCrest, name: "Elysium Gold Crest", location: "G.V. Residency, Coimbatore" },
-  { src: villaPark, name: "Elysium Villa Park", location: "Off Avinashi Road, Coimbatore" },
   { src: flushingMeadows, name: "Elysium Flushing Meadows", location: "Off Avinashi Road, Coimbatore" },
+  { src: villaPark, name: "Elysium Villa Park", location: "Off Avinashi Road, Coimbatore" },
+  { src: villaPrimero, name: "Elysium Casa Del Sol", location: "Saravanampatti, Coimbatore" },
   { src: palacio, name: "Elysium Palacio", location: "Peelamedu, Coimbatore" },
   { src: acropolis, name: "Elysium Acropolis", location: "Peelamedu, Coimbatore" },
   { src: gardenia, name: "Elysium Gardenia", location: "Krishna Colony, Coimbatore" },
@@ -35,6 +38,10 @@ const ITEMS = [
 const DRAG_THRESHOLD = 56;
 const AUTOPLAY_HOLD_MS = 3600;
 const AUTOPLAY_RESUME_MS = 3500;
+// Autoplay only cycles through the first 7 slides, looping back to the
+// first; manual navigation (arrows/dots/drag) is unrestricted and can
+// still reach slides 8-11.
+const AUTOPLAY_LIMIT = 7;
 
 export default function Gallery() {
   const [index, setIndex] = useState(0);
@@ -65,7 +72,12 @@ export default function Gallery() {
   const scheduleAutoplayAdvance = () => {
     clearAutoplayAdvance();
     autoplayRef.current.advanceTimer = setTimeout(() => {
-      if (!autoplayRef.current.paused) go(indexRef.current + 1);
+      if (!autoplayRef.current.paused) {
+        const current = indexRef.current;
+        // Stay within slides 1-7; if a manual jump left us past that
+        // range, the next autoplay tick brings it back to the first slide.
+        go(current < AUTOPLAY_LIMIT - 1 ? current + 1 : 0);
+      }
       scheduleAutoplayAdvance();
     }, AUTOPLAY_HOLD_MS);
   };

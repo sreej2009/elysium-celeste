@@ -310,7 +310,6 @@ export default function Specifications() {
   return (
     <section id="specifications" className="specs" aria-labelledby="specs-title" ref={sectionRef}>
       <div className="specs-spread">
-        <div className="specs-micro" aria-hidden="true">Homes <i /> People <i /> A brighter tomorrow</div>
         <FadeIn as="header" className="specs-head">
           <span className="eyebrow is-accent">Specifications <i /></span>
           <h2 id="specs-title" className="specs-title">Every detail, specified with intent.</h2>
@@ -440,7 +439,6 @@ export default function Specifications() {
                   );
                 })}
               </div>
-              <div className="specs-side-note" aria-hidden="true">R.S.<br />Puram<i />Coimbatore</div>
             </div>
           </div>
         )}

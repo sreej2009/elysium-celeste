@@ -32,15 +32,14 @@ export const CONTACT = {
   website: "www.elysium.in",
   address: "B-2, Elysium Towers, Door No: 21, ATT Colony, Coimbatore - 641018, Tamil Nadu, India.",
   coordinates: `11°0'43" N 76°57'15" E`,
+  mapsUrl: "https://www.google.com/maps/search/?api=1&query=Elysium+Celeste+Coimbatore",
 };
 
 export const LOCATION_LANDMARKS = [
   "Brookfields Mall",
-  "Kongunad Hospital",
   "Ganga Hospital",
   "KMCH City Centre",
-  "Gandhipuram Central Bus Stand",
-  "Gandhipuram Town Bus Stand",
+  "Eye Foundation",
   "Railway Station",
 ];
 
@@ -158,13 +157,6 @@ export const SPEC_CATEGORIES = [
     ],
   },
 ];
-
-// The live site's floor/unit availability chart is rendered client-side by
-// JavaScript; the specific per-unit sold/available status could not be
-// verified from source, so it is intentionally not asserted here. The
-// building's real, verifiable structure (5 floors, one Type A + one Type B
-// unit per floor) is used to build the elevation selector instead.
-export const BUILDING_FLOORS = [5, 4, 3, 2, 1];
 
 export const APARTMENTS: Record<"4bhk" | "3bhk", ApartmentType> = {
   "4bhk": {

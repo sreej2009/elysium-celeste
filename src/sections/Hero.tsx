@@ -19,11 +19,10 @@ function FieldIcon({ kind }: { kind: "person" | "phone" | "mail" | "message" | "
   return <svg className="hero-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true"><path d={paths[kind]} /></svg>;
 }
 
-function MetaIcon({ kind }: { kind: "location" | "floors" | "frame" }) {
+function MetaIcon({ kind }: { kind: "location" | "floors" }) {
   const paths = {
     location: "M12 21s7-7.1 7-12a7 7 0 1 0-14 0c0 4.9 7 12 7 12Z M12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z",
     floors: "M5 21V9l7-5 7 5v12M5 21h14M9 21v-4h6v4M9 9h.01M9 13h.01M15 9h.01M15 13h.01",
-    frame: "M12 3 2 9l10 6 10-6-10-6ZM2 15l10 6 10-6M2 12l10 6 10-6",
   };
   return (
     <svg className="hero-info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true">
@@ -33,9 +32,14 @@ function MetaIcon({ kind }: { kind: "location" | "floors" | "frame" }) {
 }
 
 const HERO_META = [
-  { num: "01", icon: "location" as const, primary: "R.S. Puram", secondary: "Coimbatore" },
+  {
+    num: "01",
+    icon: "location" as const,
+    primary: "Ponnurangam Rd East",
+    secondary: "R.S. Puram",
+    href: CONTACT.mapsUrl,
+  },
   { num: "02", icon: "floors" as const, primary: "Stilt + 5", secondary: "Stories" },
-  { num: "03", icon: "frame" as const, primary: "RCC Framed", secondary: "Structure" },
 ];
 
 export default function Hero() {
@@ -211,15 +215,22 @@ export default function Hero() {
 
         <aside className="hero-info" aria-label="Celeste location and architecture">
           <span className="hero-info-rule" aria-hidden="true" />
-          {HERO_META.map((item) => (
-            <div className="hero-info-item" key={item.num}>
-              <MetaIcon kind={item.icon} />
-              <span className="hero-info-text">
-                <span className="hero-info-primary">{item.primary}</span>
-                <span className="hero-info-secondary">{item.secondary}</span>
-              </span>
-            </div>
-          ))}
+          {HERO_META.map((item) => {
+            const Tag = item.href ? "a" : "div";
+            return (
+              <Tag
+                className="hero-info-item"
+                key={item.num}
+                {...(item.href ? { href: item.href, target: "_blank", rel: "noopener noreferrer" } : {})}
+              >
+                <MetaIcon kind={item.icon} />
+                <span className="hero-info-text">
+                  <span className="hero-info-primary">{item.primary}</span>
+                  <span className="hero-info-secondary">{item.secondary}</span>
+                </span>
+              </Tag>
+            );
+          })}
         </aside>
 
         <div className="hero-type">
@@ -298,7 +309,7 @@ export default function Hero() {
               </label>
 
               <button type="submit" className="hero-enquiry-submit">
-                <span>Request a Private Conversation</span>
+                <span>Let&rsquo;s Talk 1-on-1</span>
                 <span className="hero-enquiry-submit-arrow" aria-hidden="true">
                   &#8594;
                 </span>

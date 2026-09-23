@@ -37,11 +37,12 @@
 }
 
 .location-title {
-  font-size: clamp(76px, 7.8vw, 128px);
-  line-height: 0.91;
+  font-size: clamp(44px, 4.4vw, 76px);
+  line-height: 0.95;
   font-weight: 400;
-  letter-spacing: -0.065em;
+  letter-spacing: -0.045em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .location-subtitle {
@@ -201,10 +202,16 @@
 }
 
 .location-map-block {
+  display: block;
   border-left: 1px solid var(--color-line-strong);
   margin-top: 30px;
   padding-left: 10px;
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.25s ease;
 }
+.location-map-block:hover { opacity: 0.75; }
+.location-map-block:hover .location-map { color: var(--color-accent); }
 
 .location-map {
   width: 100%;
@@ -274,7 +281,7 @@
 }
 
 @media (max-width: 1100px) {
-  .location-title { font-size: 7.7vw; }
+  .location-title { font-size: 4.6vw; }
   .location-copy { padding-right: 4px; font-size: 14px; line-height: 1.7; }
   .location-main-image { height: 690px; }
   .location-side { padding-left: 4px; }
@@ -284,7 +291,7 @@
 @media (max-width: 900px) {
   .location-grid { row-gap: 32px; }
   .location-copy-col { grid-column: 1 / 6; padding-top: 18px; }
-  .location-title { font-size: 8.4vw; }
+  .location-title { font-size: 5vw; }
   .location-heading .eyebrow { margin-bottom: 26px; }
   .location-subtitle { max-width: 240px; margin-top: 20px; }
   .location-copy { margin-top: 22px; }
@@ -331,7 +338,7 @@
   /* Intro */
   .location-copy-col { grid-area: copy; width: 100%; padding-top: 0; position: relative; }
   .location-heading .eyebrow { margin-bottom: 12px; }
-  .location-title { font-size: clamp(42px, 13.5vw, 60px); line-height: 0.96; }
+  .location-title { font-size: clamp(28px, 8.8vw, 40px); line-height: 0.96; }
   .location-subtitle { max-width: none; margin-top: 8px; font-size: 9px; letter-spacing: 0.17em; }
   .location-copy { max-width: none; margin-top: 14px; padding-right: 0; font-size: 13px; line-height: 1.65; }
   .location-copy::before { margin-bottom: 14px; }
@@ -410,10 +417,6 @@
   .location-nearby { grid-area: nearby; margin-top: 8px; padding: 20px 16px; }
   .location-nearby-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 16px; margin-top: 14px; }
   .location-nearby-list li { padding-block: 9px; font-size: 11.5px; line-height: 1.4; }
-  /* 7 landmarks split 3 left / 4 right (matching the reference) instead of the
-     default alternating auto-placement, which would put the 7th item (Railway
-     Station) in the left column. Only the 7th item needs an explicit override. */
-  .location-nearby-list li:nth-child(7) { grid-column: 2; }
 
   .location-orbit { display: none; }
 }
