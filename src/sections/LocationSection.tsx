@@ -1,6 +1,6 @@
-// Photograph: Sushma Sms — https://x.com/SmsSushma/status/1471017003347443715
+// Location image supplied by the user.
 import { useRef } from "react";
-import rsPuramClockTower from "../assets/images/rs-puram-clock-tower.jpg";
+import rsPuramClockTower from "../assets/images/rs-puram-tower.png";
 import buildingNight from "../assets/images/building-night.webp";
 import FadeIn from "../components/FadeIn";
 import { scrollToId } from "../lib/smoothScroll";
@@ -127,4 +127,3 @@ export default function LocationSection() {
     </section>
   );
 }
-
